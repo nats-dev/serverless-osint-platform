@@ -5,13 +5,13 @@
 
 Bachelor's Thesis in progress
 
-⋆｡°✩ 𝒐𝒗𝒆𝒓𝒗𝒊𝒆𝒘
+⋆｡°✩ 𝑶𝒗𝒆𝒓𝒗𝒊𝒆𝒘
 
 This project proposes a centralized and automated platform for Open Source Intelligence (OSINT) data collection, processing, and visualization using a serverless cloud architecture.
 
 The goal is to integrate existing OSINT tools (TheHarvester, Spiderfoot, Exiftool, etc.) into a unified, scalable, and cost-efficient cloud-based system.
 
-⋆｡°✩ 𝒎𝒐𝒕𝒊𝒗𝒂𝒕𝒊𝒐𝒏
+⋆｡°✩ 𝑴𝒐𝒕𝒊𝒗𝒂𝒕𝒊𝒐𝒏
 
 Traditional OSINT tools operate in isolation and often rely on manual execution or traditional server infrastructures. This platform aims to:
 
