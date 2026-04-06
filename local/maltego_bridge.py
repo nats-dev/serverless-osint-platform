@@ -25,6 +25,12 @@ def main():
         else:
             resultados = {}
 
+        if 'error' in resultados:
+            print(f"<MaltegoMessage><MaltegoTransformResponseMessage><Entities><Entity Type='maltego.Phrase'><Value>Error en Lambda: {resultados['error']}</Value></Entity></Entities></MaltegoTransformResponseMessage></MaltegoMessage>")
+            sys.exit(0)
+
+        emails = resultados.get('emails', [])
+
         emails = resultados.get('emails', [])
         hosts = resultados.get('hosts', [])
 

@@ -5,6 +5,7 @@ import os
 
 def handler(event, context):
     print(f"--- Evento recibido: {event} ---")
+    target = None
     
     # Extraer dominio (target)
     if isinstance(event, dict):
@@ -28,24 +29,33 @@ def handler(event, context):
     cmd = [
         "theHarvester", 
         "-d", target,
-        "-b", "duckduckgo,crtsh", 
-        "-l", "50",
+        "-b", "crtsh,duckduckgo,brave", 
+        "-l", "500",
         "-f", output_file
     ]
 
     try:
+        # Cambiar el directorio HOME a /tmp para evitar problemas en Lambda
+        my_env = os.environ.copy()
+        my_env["HOME"] = "/tmp"
+
         # Ejecutar theHarvester
         print(f"Ejecutando comando: {' '.join(cmd)}")
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
-        
-        # Imprimir todo para evitar errores
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=600, env=my_env)
+
+        # Imprimir todo para evitar errores en Cloudwatch
         print("STDOUT:", result.stdout)
         print("STDERR:", result.stderr)
         
         # Leer resultados
         json_path = output_file + ".json"
         if not os.path.exists(json_path):
-            return {"statusCode": 404, "body": json.dumps({"error": "No se encontraron datos"})}
+            #Debug
+            debug_info = f"STDOUT: {result.stdout} | STDERR: {result.stderr}"
+            return {
+                "statusCode": 404, 
+                "body": json.dumps({"error": f"theHarvester falló y no creó el JSON. Logs: {debug_info}"})
+            }
 
         with open(json_path, 'r') as f:
             data = json.load(f)
