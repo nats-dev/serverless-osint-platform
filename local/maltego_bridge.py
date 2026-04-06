@@ -30,8 +30,6 @@ def main():
             sys.exit(0)
 
         emails = resultados.get('emails', [])
-
-        emails = resultados.get('emails', [])
         hosts = resultados.get('hosts', [])
 
         # Formatear
